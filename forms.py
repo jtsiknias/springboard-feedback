@@ -35,3 +35,18 @@ class RegisterForm(FlaskForm):
         validators=[InputRequired(
             message="Last name cannot be blank."),
             Length(max=30, message="Last name cannot be more than 30 characters long.")])
+
+
+class LoginForm(FlaskForm):
+    """User login form"""
+
+    username = StringField(
+        "Username",
+        validators=[InputRequired(
+            message="Username cannot be blank."),
+            Length(max=20, message="Username cannot be more than 20 characters long.")])
+
+    password = PasswordField(
+        "Password",
+        validators=[InputRequired(
+            message="Password cannot be blank.")])
