@@ -1,15 +1,13 @@
 {% extends "base.html" %} {% block title %}Homepage{% endblock %} {% block
 content %}
-<div class="container my-4">
-    <h1 class="mb-4">Register</h1>
-    <form method="POST" class="">
-        {{form.hidden_tag()}} {% for field in form if field.widget.input_type !=
-        "hidden" %}
-        <div class="form-group">
-            {{field.label}} {{field(class_="form-control")}}
-        </div>
-        {% endfor %}
-        <button type="submit" class="btn btn-success">Register</button>
-    </form>
-</div>
+<h1 class="mb-4">Register</h1>
+<form method="POST" class="">
+    {{form.hidden_tag()}} {% for field in form if field.widget.input_type !=
+    "hidden" %}
+    <div class="form-group">
+        {{field.label}} {{field(class_="form-control")}}
+    </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-success">Register</button>
+</form>
 {% endblock %}

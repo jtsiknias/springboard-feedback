@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, session, flash
 from flask_debugtoolbar import DebugToolbarExtension
 from secrets import SECRET_KEY
-from models import connect_db, db
+from models import connect_db, db, User
 from forms import RegisterForm
 
 app = Flask(__name__)
@@ -24,6 +24,25 @@ def homepage():
 
 
 @app.route("/register", methods=["GET", "POST"])
-def register():
+def register_user():
     form = RegisterForm()
-    return render_template("register.html", form=form)
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        email = form.email.data
+        first_name = form.first_name.data
+        last_name = form.last_name.data
+        new_user = User.register(
+            username, password, email, first_name, last_name)
+        db.session.add(new_user)
+        db.session.commit()
+        session["username"] = new_user.username
+        flash("Account has been created. Welcome!", "success")
+        return redirect("/secret")
+    else:
+        return render_template("register.html", form=form)
+
+
+@app.route("/secret")
+def secret_page():
+    return render_template("secret.html")
