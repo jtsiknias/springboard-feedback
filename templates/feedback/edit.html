@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block title %}Edit Feedback{% endblock %} {% block
+content %}
+<h1>Edit Feedback</h1>
+<form method="POST">
+    {{form.hidden_tag()}} {% for field in form if field.widget.input_type !=
+    "hidden" %}
+    <div class="form-group">
+        {{field.label}} {{field(class_="form-control")}}
+    </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-success">Edit feedback</button>
+</form>
+{% endblock %}

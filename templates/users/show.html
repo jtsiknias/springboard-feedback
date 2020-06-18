@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% block title %}User Info{% endblock %} {% block
+content %}
+<h1 class="mb-4">User Info</h1>
+<ul class="list-group list-group-flush mb-4">
+    <li class="list-group-item">
+        <strong>Username</strong>: {{user.username}}
+    </li>
+    <li class="list-group-item"><strong>Email</strong>: {{user.email}}</li>
+    <li class="list-group-item">
+        <strong>First Name</strong>: {{user.first_name}}
+    </li>
+    <li class="list-group-item">
+        <strong>Last Name</strong>: {{user.last_name}}
+    </li>
+</ul>
+<form action="/users/{{user.username}}/delete" method="POST">
+<div class="card border-danger my-4">
+    <div class="card-body text-danger">
+        <h2 class="card-title">Danger Zone</h2>
+        <button type="submit" class="btn btn-danger"
+            >Delete user</a
+        >
+    </div>
+</div>
+</form>
+<h2>Feedback</h2>
+<div class="card-deck">
+    {% for feedback in user.feedback %}
+    <div class="card border-primary mb-3">
+        <div class="card-body text-primary">
+            <h5 class="card-title">{{feedback.title}}</h5>
+            <p class="card-text">{{feedback.content}}</p>
+            <p class="card-text">
+                <small class="text-muted">Author: {{feedback.username}}</small>
+            </p>
+            <a href="/feedback/{{feedback.id}}/update" class="btn btn-success"
+                >Edit feedback</a
+            >
+            <a href="/feedback/{{feedback.id}}/delete" class="btn btn-danger"
+                >Delete feedback</a
+            >
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<a href="/users/{{user.username}}/feedback/add" class="btn btn-success">Add feedback</a>
+{% endblock %}

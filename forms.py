@@ -50,3 +50,13 @@ class LoginForm(FlaskForm):
         "Password",
         validators=[InputRequired(
             message="Password cannot be blank.")])
+
+
+class FeedbackForm(FlaskForm):
+    """Add new feedback."""
+    title = StringField("Title",
+                        validators=[InputRequired(message="Title cannot be blank."),
+                                    Length(max=100, message="Title length cannot be more than 100 characters.")])
+
+    content = StringField("Content",
+                          validators=[InputRequired(message="Content cannot be blank.")])

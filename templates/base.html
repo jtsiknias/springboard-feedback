@@ -11,6 +11,25 @@
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body>
+        <ul class="nav">
+            {% if "username" in session %}
+            <li class="nav-item">
+                <a href="/users/{{session['username']}}" class="nav-link"
+                    >Account Info</a
+                >
+            </li>
+            <li class="nav-item">
+                <a href="/logout" class="nav-link">Log Out</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a href="/register" class="nav-link">Register</a>
+            </li>
+            <li class="nav-item">
+                <a href="/login" class="nav-link">Login</a>
+            </li>
+            {% endif %}
+        </ul>
         <div class="container my-4">
             {% for category, msg in get_flashed_messages(with_categories=true)
             %}
